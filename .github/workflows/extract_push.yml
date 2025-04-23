@@ -2,7 +2,7 @@ name: Extract Features and Push Results
 
 on: 
   push:  
-    path:
+    paths:
       - '**/*.gz'
 
 jobs: 
@@ -20,14 +20,14 @@ jobs:
 
       - name: Install Feature Extractor
         run: |
-          pip install git+https://x-access-token:${{secret.ORG_PAT}}@github.com/GraphVertexColoring/graph-feat.git
+          pip install git+https://x-access-token:${{secrets.ORG_PAT}}@github.com/GraphVertexColoring/graph-feat.git
       
       - name: Extract Features
         run: python run_extractor.py
 
       - name: Clone coloring Repo
         run: |
-          git clone https://x-access-token:${{secret.ORG_PAT}}@github.com/GraphVertexColoring/coloring.git
+          git clone https://x-access-token:${{secrets.ORG_PAT}}@github.com/GraphVertexColoring/coloring.git
       
       - name: Push Feature file
         run: |
