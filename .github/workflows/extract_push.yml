@@ -1,7 +1,7 @@
 name: Extract Features and Push Results
 
 on: 
-  push: # need to specify what is pushed 
+  push:  
     path:
       - '**/*.gz'
 
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Instance Repo
         uses: actions/checkout@v4
 
-      - name: Clone Feature Extractor Repo
+      - name: Install Feature Extractor
         run: |
           pip install git+https://x-access-token:${{secret.ORG_PAT }}@github.com/GraphVertexColoring/graph-feat.git
       
