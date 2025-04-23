@@ -1,0 +1,40 @@
+name: Extract Features and Push Results
+
+on: 
+  push: # need to specify what is pushed 
+    path:
+      - '**/*.gz'
+
+jobs: 
+  extract_push:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+    
+      - name: Checkout Instance Repo
+        uses: actions/checkout@v4
+
+      - name: Clone Feature Extractor Repo
+        run: |
+          pip install git+https://x-access-token:${{secret.ORG_PAT }}@github.com/GraphVertexColoring/graph-feat.git
+      
+      - name: Extract Features
+        run: python run_extractor.py
+
+      - name: Clone coloring Repo
+        run: |
+          git clone https://x-access-token:${{secret.ORG_PAT }}@github.com/GraphVertexColoring/coloring.git
+      
+      - name: Push Feature file
+        run: |
+          cd coloring
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          cp ../InstanceFeatures.csv ./Resources/InstanceFeatures.csv 
+          git add .
+          git commit -m "Automated feature extraction results"
+          git push origin main
