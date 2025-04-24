@@ -1,3 +1,3 @@
-from graph_feature import run
+from graph_feature.main import run
 
 run()
