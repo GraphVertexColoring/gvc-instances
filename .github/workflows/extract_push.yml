@@ -38,4 +38,4 @@ jobs:
           cp ../InstanceFeatures.csv ./Resources/InstanceFeatures.csv 
           git add .
           git commit -m "Automated feature extraction results"
-          git push origin main
+          git push origin master
