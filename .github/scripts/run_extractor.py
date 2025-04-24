@@ -1,3 +1,3 @@
-from feature_extractor import run
+from graph_feature import run
 
 run()
