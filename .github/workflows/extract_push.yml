@@ -26,10 +26,13 @@ jobs:
       - name: Extract Features
         run: python .github/scripts/run_extractor.py
 
-      - name: Clone coloring Repo
-        run: |
-          git clone https://x-access-token:${{secrets.ORG_PAT}}@github.com/GraphVertexColoring/coloring.git
-      
+      - name: Checkout coloring Repository
+        uses: actions/checkout@v4
+        with:
+          repository: GraphVertexColoring/coloring
+          token: ${{ secrets.ORG_PAT }}
+          path: coloring
+          
       - name: Push Feature file
         run: |
           cd coloring
