@@ -1,1 +1,1 @@
-This Repository, contains DIMACS benchmarking isntances used for graph coloring problems. 
+This Repository, contains DIMACS benchmarking instances used for graph coloring problems. 
